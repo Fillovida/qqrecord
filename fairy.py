@@ -93,7 +93,7 @@ def recordClean(file_name, beginTime, endTime, password):
             line = re.sub(face_pat, '', line)    # 去掉表情
         if re.match(any_time, line):             # 去掉时间
             continue
-        if re.match(r'@[^\s]', line):
+        if re.match(r'@[^\s]', line):            # 如果@其他人，前面加QA：当作答疑
             line = 'QA: ' + line
         content.append(line)
 
@@ -199,7 +199,7 @@ def wordFormat(file_name, password):
         else:
             paragraphs[i].style = text_style  # 当前段格式
 
-    docu.save('%s1.docx'% file_name[:-4])
+    docu.save('%s.docx'% file_name[:-4])
 
 
 def main():
@@ -210,10 +210,6 @@ def main():
     beginTime = input('几点开始的分享呢？格式例子：20：00')
     endTime = input('几点结束的分享呢？格式例子：20:30')
 
-    # file_name = '长投学堂77期42班小白营.txt'
-    # password = '12345'
-    # beginTime = '20:02'
-    # endTime = '20:50'
     recordClean(file_name, beginTime, endTime, password)
 
 
